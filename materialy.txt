@@ -1,1 +1,7 @@
-
+logowanie - mysql -uroot -p
+wybór bazy - use (nazwa bazy)
+tworzenie bazy - create database
+tworzenie tabeli - create tabel
+pozyskiwanie zawartości tebeli - describe (nazwa tabeli)
+pokazanie bazy danych - show databases
+https://pasja-informatyki.pl/
