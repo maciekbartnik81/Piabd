@@ -5,3 +5,5 @@ tworzenie tabeli - create tabel
 pozyskiwanie zawartości tebeli - describe (nazwa tabeli)
 pokazanie bazy danych - show databases
 https://pasja-informatyki.pl/
+tc - zaawansowane szukanie plikow i folderow, seryjne tworzenie folderow plikow, sumy kontrolne, atrybuty pliku, pakowanie i rozpakowywanie i tworzenie archiwów, seryjna zmiana nazw plikow, narzedzie wieloktornej zamiany
+github - udostepnianie plikow linkiem
