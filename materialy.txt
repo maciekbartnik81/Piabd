@@ -7,3 +7,19 @@ pokazanie bazy danych - show databases
 https://pasja-informatyki.pl/
 tc - zaawansowane szukanie plikow i folderow, seryjne tworzenie folderow plikow, sumy kontrolne, atrybuty pliku, pakowanie i rozpakowywanie i tworzenie archiwów, seryjna zmiana nazw plikow, narzedzie wieloktornej zamiany
 github - udostepnianie plikow linkiem
+
+SELECT * FROM `auto` WHERE cena >= 40000 AND cena <= 50000; Wybierz gdzie cena jest wieksza rowna 40000 i cena mniejsza rowna 50000
+= rowny
+<> nierowny
+mniejszy <
+wiekszy >
+<= mnniejszy lub rowny
+>= wiekszy lub rowny
+AND i
+OR lub
+/*komentarz*/
+/*SELECT * FROM `auto` WHERE cena > 10000 AND cena < 35000 order BY cena desc limit 3*/
+/*SELECT * FROM `auto` WHERE cena between 10000 AND 35000 order BY cena desc limit 3*/
+/*nierówny za wyjątkiem dwóch 3 rekordy posortowane malejąco - DESC*/
+/*between* klauzula może być też NOT between*/
+SELECT * FROM auto WHERE kolor BETWEEN 'A' AND 'C' order by typ; wybierz z bazy auto gdzie kolor jest miedzy a i c i uporzadkowany pod typ
