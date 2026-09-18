@@ -23,3 +23,8 @@ OR lub
 /*nierówny za wyjątkiem dwóch 3 rekordy posortowane malejąco - DESC*/
 /*between* klauzula może być też NOT between*/
 SELECT * FROM auto WHERE kolor BETWEEN 'A' AND 'C' order by typ; wybierz z bazy auto gdzie kolor jest miedzy a i c i uporzadkowany pod typ
+UPDATE auto set pojemnosc='4.0' WHERE auto_id=42 zaaktualizowanie wartosci rekordu
+INSERT into auto (kolor,typ) VALUES ("czerwony,kombi") wstawianie wartosci do rekordu
+UPDATE auto SET cena='25000' * 1.5 WHERE auto_id=42 zaaktualizowanie wartosci rekordu o 50%
+DELETE FROM auto WHERE autoid=42 usuwanie rekordu
+Drop - cale usuniecie bazy lub tabeli
