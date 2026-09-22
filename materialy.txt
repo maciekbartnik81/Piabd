@@ -28,3 +28,21 @@ INSERT into auto (kolor,typ) VALUES ("czerwony,kombi") wstawianie wartosci do re
 UPDATE auto SET cena='25000' * 1.5 WHERE auto_id=42 zaaktualizowanie wartosci rekordu o 50%
 DELETE FROM auto WHERE autoid=42 usuwanie rekordu
 Drop - cale usuniecie bazy lub tabeli
+Wyswietl uczniów mieszkających w lodzi - SELECT * FROM `uczniowie` WHERE `miejscowosc` = 'Łódź'
+wyświetl uczniów którzy są z lodzi i ich hobby to programowanie - SELECT * FROM `uczniowie` WHERE `miejscowosc` = 'Łódź' AND `hobby`= 'programowanie';
+
+wyświetl uczniów mieszkających w lodzi lub warszawie - SELECT * FROM `uczniowie` WHERE `miejscowosc` = 'Łódź' OR `miejscowosc`='Warszawa'
+
+wyświetl uczniów z 3 wskazanych miejscowości 
+
+wyświetl uczniów którzy nie mieszkają w warszawie ani w Krakowie
+
+wyświetl uczniów których nazwisko zaczyna się od litery K - SELECT * FROM `uczniowie` WHERE nazwisko LIKE 'K%';
+
+wyświetl uczniów urodzonych w latach 2007-2008 - SELECT * FROM `uczniowie` WHERE data_urodzenia BETWEEN '2007-01-01' and '2008-12-31';
+
+wyświetl wszystkie miejscowości bez powtórzeń - SELECT DISTINCT miejscowosc FROM uczniowie order by miejscowosc ASC;
+
+policz wszystkich uczniów z Łodzi - SELECT COUNT(*) As chłopaki_z_łodzi from uczniowie where miejscowosc='Łódź';
+wyświetl hobby które występują u co najmniej 10 uczniów - SELECT hobby, COUNT(*) as liczba_uczniów from uczniowie group by hobby having count(*) >= 10 order by liczba_uczniów DESC;  
+
