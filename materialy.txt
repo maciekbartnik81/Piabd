@@ -46,3 +46,14 @@ wyświetl wszystkie miejscowości bez powtórzeń - SELECT DISTINCT miejscowosc 
 policz wszystkich uczniów z Łodzi - SELECT COUNT(*) As chłopaki_z_łodzi from uczniowie where miejscowosc='Łódź';
 wyświetl hobby które występują u co najmniej 10 uczniów - SELECT hobby, COUNT(*) as liczba_uczniów from uczniowie group by hobby having count(*) >= 10 order by liczba_uczniów DESC;  
 
+• COUNT() – zwraca liczbę wierszy lub rekordów (np. COUNT(*) liczy wszystkie wiersze, a COUNT(kolumna) pomija wartości NULL).
+• AVG() – wylicza średnią arytmetyczną dla wskazanego pola liczbowego (ignoruje NULL).
+• MIN() – zwraca najmniejszą wartość z danego zbioru (liczbową lub tekstową).
+• MAX() – zwraca największą wartość z danego zbioru.
+
+tworzenie plikow
+zaawansowane wyszukiwanie po nazwie
+sumy kontrolne,weryfikacja
+tworzenie nazw plikow wedlug schematow
+dzielenie plikow za pomoca ZIP-a
+podstawowe operacje
