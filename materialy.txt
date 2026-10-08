@@ -57,3 +57,19 @@ sumy kontrolne,weryfikacja
 tworzenie nazw plikow wedlug schematow
 dzielenie plikow za pomoca ZIP-a
 podstawowe operacje
+
+1) Wyłączenie sewera - mysqladmin -u root shutdown
+2) Uruchomienie serwera MySQL jako samodzielną aplikację - mysqld --console
+3) Zatrzymanie usługi MySQL - net stop nazwa_usługi
+4) Uruchom program klienta i połącz się z serwerem MySQL - mysql -u root --password-hasło, mysql -u root -phasło
+5) Zakończenie połączenia z serwerem - quit
+6) tworzenie bazy - create database nazwa_bazy;
+7) Usuwanie bazy danych - drop database nazwa_bazy;
+8) Logowanie do serwera z wyborem bazy - mysql -u nazwa_użytkownika -phasło nazwa_bazy
+9) Tworzenie i usuwanie kont użytkowników - create user nazwa [identified by [password] 'hasło'];
+10) Tworzenie konta z nadaniem hasła - create user nazwa identified by 'haslo'
+11) Usuwanie konta użytkownika - drop user nazwa
+12) Zmiana nazwy użytkownika - rename user nazwa to nowa nazwa
+13) Zmiana hasła do konta - set password for nazwa = password('hasło');
+14) Nadawanie praw do konta użytkownika - GRANT usage ON* to nazwa;
+15) 2 sposób zmiany hasła - GRANT usage ON* to nazwa identified by 'hasło'
