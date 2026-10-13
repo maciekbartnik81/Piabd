@@ -69,7 +69,25 @@ podstawowe operacje
 9) Tworzenie i usuwanie kont użytkowników - create user nazwa [identified by [password] 'hasło'];
 10) Tworzenie konta z nadaniem hasła - create user nazwa identified by 'haslo'
 11) Usuwanie konta użytkownika - drop user nazwa
+
+poradnik (tutorial) - Git
+.pdf (spis treści)
+(numery strony)
+(nagłówki)
+(zrzuty ekranu - podpisane i ponumerowane)
+
 12) Zmiana nazwy użytkownika - rename user nazwa to nowa nazwa
 13) Zmiana hasła do konta - set password for nazwa = password('hasło');
 14) Nadawanie praw do konta użytkownika - GRANT usage ON* to nazwa;
 15) 2 sposób zmiany hasła - GRANT usage ON* to nazwa identified by 'hasło'
+
+uslugi xampp
+pliki konfiguracyjne
+na jakich portach pracuje xampp
+
+backup - baz danych
+/kopia bazy (plik binarny)
+
+Kolumne z zdjeciem dodac
+w bazie ma byc zdj zdj
+wykonac export do sql
