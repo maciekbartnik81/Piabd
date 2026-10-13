@@ -91,3 +91,4 @@ backup - baz danych
 Kolumne z zdjeciem dodac
 w bazie ma byc zdj zdj
 wykonac export do sql
+backup mysqldump
