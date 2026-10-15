@@ -92,3 +92,7 @@ Kolumne z zdjeciem dodac
 w bazie ma byc zdj zdj
 wykonac export do sql
 backup mysqldump
+
+Backup poradnik
+mysqldump -u root 4bgr1 uczniowie > uczniowie_backup.sql
+type uczniowie_backup.sql
