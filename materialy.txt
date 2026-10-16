@@ -96,3 +96,8 @@ backup mysqldump
 Backup poradnik
 mysqldump -u root 4bgr1 uczniowie > uczniowie_backup.sql
 type uczniowie_backup.sql
+
+porty 
+konfiguracja xamppa
+zmiana nazwy uzytkownika 
+zmiana hasla uzytkownika
