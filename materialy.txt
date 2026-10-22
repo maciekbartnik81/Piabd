@@ -101,3 +101,15 @@ porty
 konfiguracja xamppa
 zmiana nazwy uzytkownika 
 zmiana hasla uzytkownika
+
+21) Wyświetl imię i nazwisko ucznia w jednej kolumnie - SELECT id, CONCAT(imie,'',nazwisko) AS uczen FROM uczniowie;
+22) Wyświetl imiona uczniów wielkimi literami - SELECT id, UPPER(imie) AS imie_duzymi_literami, nazwisko FROM uczniowie
+23) Wyświetl uczniów urodzonych w czerwcu - SELECT imie, nazwisko, data_urodzenia FROM uczniowie WHERE MONTH(data_urodzenia) = 6 ORDER BY data_urodzenia
+24) Wyświetl uczniów urodzonych w czerwcu i grudniu - SELECT imie, nazwisko, data_urodzenia FROM uczniowie WHERE MONTH(data_urodzenia) in (6,12) ORDER BY data_urodzenia; 
+25) Wyświetl uczniów urodzonych w czerwcu lub w grudniu - SELECT imie, nazwisko, data_urodzenia FROM uczniowie WHERE MONTH(data_urodzenia) = 6 or MONTH(data_urodzenia) = 12 ORDER BY data_urodzenia; 
+26) Oblicz wiek każdego ucznia -  Wyświetl uczniów urodzonych w czerwcu lub w grudniu - SELECT imie,nazwisko,data_urodzenia, TIMESTAMPDIFF(YEAR,data_urodzenia,CURDATE()) As wiek FROM uczniowie Order By Wiek DESC;
+27) Wyświetl uczniów, których adres e-mail zawiera naziwsko "kowalski" - SELECT imie, nazwisko, email FROM uczniowie WHERE email LIKE '%kowalski%';
+28) Wyświetl najstarszego i najmłodszego ucznia według daty urodzenia (same daty) - SELECT MIN(data_urodzenia) AS najstarszy, MAX(data_urodzenia) AS najmłodszy FROM uczniowie
+29) Wyświetl uczniów mieszkających w najliczniej reprezentowanej miejscowości - SELECT imie, nazwisko, miejscowosc FROM uczniowie WHERE miejscowosc = (SELECT miejscowosc FROM uczniowie GROUP BY miejscowosc ORDER BY COUNT(*) DESC, miejscowosc ASC LIMIT 1 ) ORDER BY nazwisko, imie;
+30) Wyświetl uczniów, których imię ma dokładnie 5 liter - SELECT id, imie, nazwisko FROM uczniowie WHERE CHAR_LENGTH(imie) = 5 ORDER BY imie;
+
