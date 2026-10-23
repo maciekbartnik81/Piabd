@@ -112,4 +112,11 @@ zmiana hasla uzytkownika
 28) Wyświetl najstarszego i najmłodszego ucznia według daty urodzenia (same daty) - SELECT MIN(data_urodzenia) AS najstarszy, MAX(data_urodzenia) AS najmłodszy FROM uczniowie
 29) Wyświetl uczniów mieszkających w najliczniej reprezentowanej miejscowości - SELECT imie, nazwisko, miejscowosc FROM uczniowie WHERE miejscowosc = (SELECT miejscowosc FROM uczniowie GROUP BY miejscowosc ORDER BY COUNT(*) DESC, miejscowosc ASC LIMIT 1 ) ORDER BY nazwisko, imie;
 30) Wyświetl uczniów, których imię ma dokładnie 5 liter - SELECT id, imie, nazwisko FROM uczniowie WHERE CHAR_LENGTH(imie) = 5 ORDER BY imie;
+31) Wyświetl trzy ostatnie cyfry numeru telefonu każdego ucznia - SELECT imie, nazwisko, RIGHT(telefon, 3) AS kocowka_telefonu FROM uczniowie ORDER BY nazwisko; 
+32) Wyświetl nazwiska uczniów zapisane małymi literami - SELECT imie, LOWER(nazwisko) AS nazwisko_male_litery FROM uczniowie
+33) Wyświetl uczniów urodzonych w pierwszym kwartale roku - SELECT imie, nazwisko, data_urodzenia FROM uczniowie WHERE MONTH(data_urodzenia) BETWEEN 1 AND 3 ORDER BY data_urodzenia; 
+35) Wyświetl datę urodzenia ucznia w formacie DD-MM-RRRR - SELECT imie, nazwisko, DATE_FORMAT(data_urodzenia, '%d-%m-%Y') AS data_polska FROM uczniowie ORDER BY nazwisko;
+
+
+
 
