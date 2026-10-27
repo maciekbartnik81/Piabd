@@ -119,4 +119,13 @@ zmiana hasla uzytkownika
 
 
 
+Funkcje agregujące 
+36) Dodaj jednego nowego ucznia podając wszystkie kolumny, w tym identyfikatorze - Insert into uczniowie (id, nazwisko, imie, data_urodzenia, miejscowosc, kod_pocztowy, email, telefon, hobby) VALUES (306, 'Robaszek', 'Robert', '2009-11-26', 'gomunice', '97-550', 'rrobaszek2009@gmail.com', '111111111', 'koledzy');
+37) Dodaj dwóch uczniów jednym poleceniem INSERT -  Insert into uczniowie (id, nazwisko, imie, data_urodzenia, miejscowosc, kod_pocztowy, email, telefon, hobby)
+VALUES
+(307, 'Robaszek', 'Robert', '2009-11-26', 'gomunice', '97-550', 'robalini2009@gmail.com', '111111111', 'koledzy'), (308, 'Robaszek', 'Robert', '2009-11-26', 'gomunice', '97-550', 'robaczek2009@gmail.com', '111111111', 'koledzy');
+38) Dodaj ucznia bez podawania id - niech AUTO INCREMENT nada je automatycznie - Insert into uczniowie (nazwisko, imie, data_urodzenia, miejscowosc, kod_pocztowy, email, telefon, hobby) VALUES ('Ociepa', 'Michał', '2009-16-06', 'Gidle', '97-540', 'mociepa4@zse-e.edu.pl', '111111111', 'sport');
+39) Utwórz kopie danych ucznia o id = 1 jako nowy rekord z id = 309 - Insert into uczniowie (id, nazwisko, imie, data_urodzenia, miejscowosc, kod_pocztowy, email, telefon, hobby) VALUES
+
+
 
