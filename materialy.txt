@@ -127,5 +127,9 @@ VALUES
 38) Dodaj ucznia bez podawania id - niech AUTO INCREMENT nada je automatycznie - Insert into uczniowie (nazwisko, imie, data_urodzenia, miejscowosc, kod_pocztowy, email, telefon, hobby) VALUES ('Ociepa', 'Michał', '2009-16-06', 'Gidle', '97-540', 'mociepa4@zse-e.edu.pl', '111111111', 'sport');
 39) Utwórz kopie danych ucznia o id = 1 jako nowy rekord z id = 309 - Insert into uczniowie (id, nazwisko, imie, data_urodzenia, miejscowosc, kod_pocztowy, email, telefon, hobby) VALUES
 
+40)stawiające do tabeli logowanie nick „Jeremi” z hasłem „Jer123”. Wstawianemu wierszowi
+należy nadać identyfikator, odpowiadający wartości klucza obcego dla wiersza z danymi „Jeremi
+Kowalski” z tabeli uczestnicy - INSERT into logowanie (id, nick, haslo) VALUES ( (SELECT logowanie_id FROM uczestnicy WHERE imie = 'Jeremi' AND nazwisko = 'Kowalski'), 'Jeremi', 'Jer123');
+
 
 
