@@ -157,5 +157,5 @@ $sql = "CREATE DATABSE 'test3'";
 mysqli_query($polacznie, $sql);
 ?>
 
-
+Przerobic co najmniej 4 odcinki Zelenta mysql i 4 odcinki php
 
