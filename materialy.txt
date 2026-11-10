@@ -159,3 +159,293 @@ mysqli_query($polacznie, $sql);
 
 Przerobic co najmniej 4 odcinki Zelenta mysql i 4 odcinki php
 
+
+
+
+# mysql -uroot -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 66
+Server version: 10.4.32-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> create database nauka;
+Query OK, 1 row affected (0.010 sec)
+
+MariaDB [(none)]> show databse;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'databse' at line 1
+MariaDB [(none)]> show databses;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'databses' at line 1
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| 1l_gr2             |
+| 4bgr1              |
+| 4g_gr1             |
+| adam               |
+| baza1l_gr1         |
+| baza5_1l_gr1       |
+| baza5_1l_gr2       |
+| chat               |
+| dane_1l_gr1        |
+| dane_1l_gr2        |
+| egzamin3_1l_gr1    |
+| egzamin3_1l_gr2    |
+| information_schema |
+| motory             |
+| mysql              |
+| nauka              |
+| performance_schema |
+| phpmyadmin         |
+| test               |
+| test3              |
++--------------------+
+20 rows in set (0.002 sec)
+
+MariaDB [(none)]> use nauka;
+Database changed
+MariaDB [nauka]> show tables;
+Empty set (0.001 sec)
+
+MariaDB [nauka]> create table pracownicy(id int auto_increment, imie varchar(20), nazwisko varchar(20), dzial int, zarobki int, primary key(id));
+Query OK, 0 rows affected (0.031 sec)
+
+MariaDB [nauka]> show tables;
++-----------------+
+| Tables_in_nauka |
++-----------------+
+| pracownicy      |
++-----------------+
+1 row in set (0.002 sec)
+
+MariaDB [nauka]> desc pracownicy;
++----------+-------------+------+-----+---------+----------------+
+| Field    | Type        | Null | Key | Default | Extra          |
++----------+-------------+------+-----+---------+----------------+
+| id       | int(11)     | NO   | PRI | NULL    | auto_increment |
+| imie     | varchar(20) | YES  |     | NULL    |                |
+| nazwisko | varchar(20) | YES  |     | NULL    |                |
+| dzial    | int(11)     | YES  |     | NULL    |                |
+| zarobki  | int(11)     | YES  |     | NULL    |                |
++----------+-------------+------+-----+---------+----------------+
+5 rows in set (0.073 sec)
+
+MariaDB [nauka]> insert into pracownicy values(null,'jan','nowak',1,2500);
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [nauka]> insert into pracownicy values(null,'robert','robaczek',1,3500);
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [nauka]> insert into pracownicy values(null,'maciek','bartnik',1,8500);
+Query OK, 1 row affected (0.018 sec)
+
+MariaDB [nauka]> select * from pracownicy;
++----+--------+----------+-------+---------+
+| id | imie   | nazwisko | dzial | zarobki |
++----+--------+----------+-------+---------+
+|  1 | jan    | nowak    |     1 |    2500 |
+|  2 | robert | robaczek |     1 |    3500 |
+|  3 | maciek | bartnik  |     1 |    8500 |
++----+--------+----------+-------+---------+
+3 rows in set (0.001 sec)
+
+MariaDB [nauka]> select imie,nazwisko from pracownicy;
++--------+----------+
+| imie   | nazwisko |
++--------+----------+
+| jan    | nowak    |
+| robert | robaczek |
+| maciek | bartnik  |
++--------+----------+
+3 rows in set (0.000 sec)
+
+MariaDB [nauka]> select * from pracownicy where imie='robert' and nazwisko='robaczek'
+    -> select * from pracownicy where imie='robert' and nazwisko='robaczek';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'select * from pracownicy where imie='robert' and nazwisko='robaczek'' at line 2
+MariaDB [nauka]> select * from pracownicy where imie='robert' and nazwisko='robaczek';
++----+--------+----------+-------+---------+
+| id | imie   | nazwisko | dzial | zarobki |
++----+--------+----------+-------+---------+
+|  2 | robert | robaczek |     1 |    3500 |
++----+--------+----------+-------+---------+
+1 row in set (0.001 sec)
+
+MariaDB [nauka]> update pracownicy set dzial=2 where id=3;
+Query OK, 1 row affected (0.004 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [nauka]> select * from pracownicy;
++----+--------+----------+-------+---------+
+| id | imie   | nazwisko | dzial | zarobki |
++----+--------+----------+-------+---------+
+|  1 | jan    | nowak    |     1 |    2500 |
+|  2 | robert | robaczek |     1 |    3500 |
+|  3 | maciek | bartnik  |     2 |    8500 |
++----+--------+----------+-------+---------+
+3 rows in set (0.001 sec)
+
+MariaDB [nauka]> select * from pracownicy where zarobki>2000;
++----+--------+----------+-------+---------+
+| id | imie   | nazwisko | dzial | zarobki |
++----+--------+----------+-------+---------+
+|  1 | jan    | nowak    |     1 |    2500 |
+|  2 | robert | robaczek |     1 |    3500 |
+|  3 | maciek | bartnik  |     2 |    8500 |
++----+--------+----------+-------+---------+
+3 rows in set (0.001 sec)
+
+MariaDB [nauka]> select sum(zarobki) from pracownicy;
++--------------+
+| sum(zarobki) |
++--------------+
+|        14500 |
++--------------+
+1 row in set (0.001 sec)
+
+MariaDB [nauka]> select sum(zarobki) from pracownicy where id=1 and id=2
+    -> select sum(zarobki) from pracownicy where id=1 and id=2;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'select sum(zarobki) from pracownicy where id=1 and id=2' at line 2
+MariaDB [nauka]> select sum(zarobki) from pracownicy where id=1 and id=2;
++--------------+
+| sum(zarobki) |
++--------------+
+|         NULL |
++--------------+
+1 row in set (0.001 sec)
+
+MariaDB [nauka]> select sum(zarobki) from pracownicy where id=1 or id=2
+    -> select sum(zarobki) from pracownicy where id=1 or id=2;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'select sum(zarobki) from pracownicy where id=1 or id=2' at line 2
+MariaDB [nauka]> select sum(zarobki) from pracownicy where id=1 or id=2;
++--------------+
+| sum(zarobki) |
++--------------+
+|         6000 |
++--------------+
+1 row in set (0.001 sec)
+
+MariaDB [nauka]> select sum(zarobki) as ile from pracownicy;
++-------+
+| ile   |
++-------+
+| 14500 |
++-------+
+1 row in set (0.001 sec)
+
+MariaDB [nauka]> select avg(zarobki) from pracownicy;
++--------------+
+| avg(zarobki) |
++--------------+
+|    4833.3333 |
++--------------+
+1 row in set (0.001 sec)
+
+MariaDB [nauka]> select count(1) from pracownicy;
++----------+
+| count(1) |
++----------+
+|        3 |
++----------+
+1 row in set (0.001 sec)
+
+MariaDB [nauka]> select count(*) from pracownicy where imie='jan';
++----------+
+| count(*) |
++----------+
+|        1 |
++----------+
+1 row in set (0.001 sec)
+
+MariaDB [nauka]> select * from pracownicy
+    -> select * from pracownicy;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'select * from pracownicy' at line 2
+MariaDB [nauka]> select * from pracownicy;
++----+--------+----------+-------+---------+
+| id | imie   | nazwisko | dzial | zarobki |
++----+--------+----------+-------+---------+
+|  1 | jan    | nowak    |     1 |    2500 |
+|  2 | robert | robaczek |     1 |    3500 |
+|  3 | maciek | bartnik  |     2 |    8500 |
++----+--------+----------+-------+---------+
+3 rows in set (0.001 sec)
+
+MariaDB [nauka]> delete from pracownicy where id=3
+    -> delete from pracownicy where id=3;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'delete from pracownicy where id=3' at line 2
+MariaDB [nauka]> delete from pracownicy where id=3;
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [nauka]> select * from pracownicy
+    -> select * from pracownicy;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'select * from pracownicy' at line 2
+MariaDB [nauka]> select * from pracownicy;
++----+--------+----------+-------+---------+
+| id | imie   | nazwisko | dzial | zarobki |
++----+--------+----------+-------+---------+
+|  1 | jan    | nowak    |     1 |    2500 |
+|  2 | robert | robaczek |     1 |    3500 |
++----+--------+----------+-------+---------+
+2 rows in set (0.001 sec)
+
+MariaDB [nauka]> insert into pracownicy values(null,'maciek','bartnik',1,8500);
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [nauka]> select * from pracownicy;
++----+--------+----------+-------+---------+
+| id | imie   | nazwisko | dzial | zarobki |
++----+--------+----------+-------+---------+
+|  1 | jan    | nowak    |     1 |    2500 |
+|  2 | robert | robaczek |     1 |    3500 |
+|  4 | maciek | bartnik  |     1 |    8500 |
++----+--------+----------+-------+---------+
+3 rows in set (0.001 sec)
+
+MariaDB [nauka]> update pracownicy set dzial=2 where id=4;
+Query OK, 1 row affected (0.020 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [nauka]> create table dzialy(numer int, nazwa varchar(15), primary key(numer));
+Query OK, 0 rows affected (0.040 sec)
+
+MariaDB [nauka]> show tables;
++-----------------+
+| Tables_in_nauka |
++-----------------+
+| dzialy          |
+| pracownicy      |
++-----------------+
+2 rows in set (0.002 sec)
+
+MariaDB [nauka]> insert into dzialy values(1,'produkcja');
+Query OK, 1 row affected (0.007 sec)
+
+MariaDB [nauka]> insert into dzialy values(2,'marketing');
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [nauka]> select * from dzialy;
++-------+-----------+
+| numer | nazwa     |
++-------+-----------+
+|     1 | produkcja |
+|     2 | marketing |
++-------+-----------+
+2 rows in set (0.001 sec)
+
+MariaDB [nauka]> select * from pracownicy;
++----+--------+----------+-------+---------+
+| id | imie   | nazwisko | dzial | zarobki |
++----+--------+----------+-------+---------+
+|  1 | jan    | nowak    |     1 |    2500 |
+|  2 | robert | robaczek |     1 |    3500 |
+|  4 | maciek | bartnik  |     2 |    8500 |
++----+--------+----------+-------+---------+
+3 rows in set (0.001 sec)
+
+
+
+
+
