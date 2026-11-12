@@ -446,6 +446,140 @@ MariaDB [nauka]> select * from pracownicy;
 3 rows in set (0.001 sec)
 
 
+Praca domowa wymaga linków
+Na swoim koncie - Github
+1)Projektujemy i uruchamiamy prostą stronę internetową 
+2)Na stronie umieszczamy przycisk z dowolnym skryptem php
+3)Skrypt php ma wykonać dowolną operację na bazie danych
+4)Przesłać link do strony z bazą danych oraz link do dokumentu opisującego proces konfiguracji i zapisać jako .pdf
 
+
+Setting environment for using XAMPP for Windows.
+uczeń@KOMPUTER07 c:\xampp
+# mysql -uroot -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 36
+Server version: 10.4.32-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> use naukja
+ERROR 1049 (42000): Unknown database 'naukja'
+MariaDB [(none)]> use nauka;
+Database changed
+MariaDB [nauka]> select * from pracownicy;
++----+--------+------------+-------+---------+
+| id | imie   | nazwisko   | dzial | zarobki |
++----+--------+------------+-------+---------+
+|  1 | jan    | nowak      |     1 |    2500 |
+|  2 | Adam   | Kowalski   |     1 |    3500 |
+|  4 | Robert | Brzozowski |     2 |    1500 |
++----+--------+------------+-------+---------+
+3 rows in set (0.013 sec)
+
+MariaDB [nauka]> select * from dzialy;
++-------+-----------+
+| numer | nazwa     |
++-------+-----------+
+|     1 | produkcja |
+|     2 | marketing |
++-------+-----------+
+2 rows in set (0.023 sec)
+
+MariaDB [nauka]> select imie, nazwisko, nazwa from pracownicy, dzialy;
++--------+------------+-----------+
+| imie   | nazwisko   | nazwa     |
++--------+------------+-----------+
+| jan    | nowak      | produkcja |
+| Adam   | Kowalski   | produkcja |
+| Robert | Brzozowski | produkcja |
+| jan    | nowak      | marketing |
+| Adam   | Kowalski   | marketing |
+| Robert | Brzozowski | marketing |
++--------+------------+-----------+
+6 rows in set (0.001 sec)
+
+MariaDB [nauka]> select imie, nazwisko, nazwa from pracownicy, dzialy where dzial=numer;
++--------+------------+-----------+
+| imie   | nazwisko   | nazwa     |
++--------+------------+-----------+
+| jan    | nowak      | produkcja |
+| Adam   | Kowalski   | produkcja |
+| Robert | Brzozowski | marketing |
++--------+------------+-----------+
+3 rows in set (0.001 sec)
+
+MariaDB [nauka]> Bye
+
+uczeń@KOMPUTER07 c:\xampp
+# mysql -uroot -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 39
+Server version: 10.4.32-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> create table telefony(id int auto_increment, telefon varchar(20), primary key(id));
+ERROR 1046 (3D000): No database selected
+MariaDB [(none)]> use nauka;
+Database changed
+MariaDB [nauka]> create table telefony(id int auto_increment, telefon varchar(20), primary key(id));
+Query OK, 0 rows affected (0.029 sec)
+
+MariaDB [nauka]> insert into telefony VALUES (null, 'ajfon')
+    -> insert into telefony VALUES (null, 'ajfon');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'insert into telefony VALUES (null, 'ajfon')' at line 2
+MariaDB [nauka]> insert into telefony VALUES (null, 'ajfon');
+Query OK, 1 row affected (0.008 sec)
+
+MariaDB [nauka]> insert into telefony VALUES (null, 'motofolia');
+Query OK, 1 row affected (0.017 sec)
+
+MariaDB [nauka]> show telefony
+    -> show telefony;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'telefony
+show telefony' at line 2
+MariaDB [nauka]> show table telefony;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'telefony' at line 1
+MariaDB [nauka]> desc telefony;
++---------+-------------+------+-----+---------+----------------+
+| Field   | Type        | Null | Key | Default | Extra          |
++---------+-------------+------+-----+---------+----------------+
+| id      | int(11)     | NO   | PRI | NULL    | auto_increment |
+| telefon | varchar(20) | YES  |     | NULL    |                |
++---------+-------------+------+-----+---------+----------------+
+2 rows in set (0.049 sec)
+
+MariaDB [nauka]> select * from telefony;
++----+-----------+
+| id | telefon   |
++----+-----------+
+|  1 | ajfon     |
+|  2 | motofolia |
++----+-----------+
+2 rows in set (0.001 sec)
+
+MariaDB [nauka]> select imie, nazwisko, nazwa from pracownicy, telefony where telefon=numer;
+ERROR 1054 (42S22): Unknown column 'nazwa' in 'field list'
+MariaDB [nauka]> select imie, nazwisko, nazwa from pracownicy, telefony where telefon=telefon;
+ERROR 1054 (42S22): Unknown column 'nazwa' in 'field list'
+MariaDB [nauka]> select imie, nazwisko, telefon from pracownicy, telefony where telefon=telefon;
++--------+------------+-----------+
+| imie   | nazwisko   | telefon   |
++--------+------------+-----------+
+| jan    | nowak      | ajfon     |
+| Adam   | Kowalski   | ajfon     |
+| Robert | Brzozowski | ajfon     |
+| jan    | nowak      | motofolia |
+| Adam   | Kowalski   | motofolia |
+| Robert | Brzozowski | motofolia |
++--------+------------+-----------+
+6 rows in set (0.001 sec)
 
 
