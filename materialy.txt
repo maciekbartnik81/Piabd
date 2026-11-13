@@ -583,3 +583,5 @@ MariaDB [nauka]> select imie, nazwisko, telefon from pracownicy, telefony where 
 6 rows in set (0.001 sec)
 
 
+
+
