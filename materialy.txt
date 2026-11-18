@@ -1,0 +1,587 @@
+logowanie - mysql -uroot -p
+wybór bazy - use (nazwa bazy)
+tworzenie bazy - create database
+tworzenie tabeli - create tabel
+pozyskiwanie zawartości tebeli - describe (nazwa tabeli)
+pokazanie bazy danych - show databases
+https://pasja-informatyki.pl/
+tc - zaawansowane szukanie plikow i folderow, seryjne tworzenie folderow plikow, sumy kontrolne, atrybuty pliku, pakowanie i rozpakowywanie i tworzenie archiwów, seryjna zmiana nazw plikow, narzedzie wieloktornej zamiany
+github - udostepnianie plikow linkiem
+
+SELECT * FROM `auto` WHERE cena >= 40000 AND cena <= 50000; Wybierz gdzie cena jest wieksza rowna 40000 i cena mniejsza rowna 50000
+= rowny
+<> nierowny
+mniejszy <
+wiekszy >
+<= mnniejszy lub rowny
+>= wiekszy lub rowny
+AND i
+OR lub
+/*komentarz*/
+/*SELECT * FROM `auto` WHERE cena > 10000 AND cena < 35000 order BY cena desc limit 3*/
+/*SELECT * FROM `auto` WHERE cena between 10000 AND 35000 order BY cena desc limit 3*/
+/*nierówny za wyjątkiem dwóch 3 rekordy posortowane malejąco - DESC*/
+/*between* klauzula może być też NOT between*/
+SELECT * FROM auto WHERE kolor BETWEEN 'A' AND 'C' order by typ; wybierz z bazy auto gdzie kolor jest miedzy a i c i uporzadkowany pod typ
+UPDATE auto set pojemnosc='4.0' WHERE auto_id=42 zaaktualizowanie wartosci rekordu
+INSERT into auto (kolor,typ) VALUES ("czerwony,kombi") wstawianie wartosci do rekordu
+UPDATE auto SET cena='25000' * 1.5 WHERE auto_id=42 zaaktualizowanie wartosci rekordu o 50%
+DELETE FROM auto WHERE autoid=42 usuwanie rekordu
+Drop - cale usuniecie bazy lub tabeli
+Wyswietl uczniów mieszkających w lodzi - SELECT * FROM `uczniowie` WHERE `miejscowosc` = 'Łódź'
+wyświetl uczniów którzy są z lodzi i ich hobby to programowanie - SELECT * FROM `uczniowie` WHERE `miejscowosc` = 'Łódź' AND `hobby`= 'programowanie';
+
+wyświetl uczniów mieszkających w lodzi lub warszawie - SELECT * FROM `uczniowie` WHERE `miejscowosc` = 'Łódź' OR `miejscowosc`='Warszawa'
+
+wyświetl uczniów z 3 wskazanych miejscowości 
+
+wyświetl uczniów którzy nie mieszkają w warszawie ani w Krakowie
+
+wyświetl uczniów których nazwisko zaczyna się od litery K - SELECT * FROM `uczniowie` WHERE nazwisko LIKE 'K%';
+
+wyświetl uczniów urodzonych w latach 2007-2008 - SELECT * FROM `uczniowie` WHERE data_urodzenia BETWEEN '2007-01-01' and '2008-12-31';
+
+wyświetl wszystkie miejscowości bez powtórzeń - SELECT DISTINCT miejscowosc FROM uczniowie order by miejscowosc ASC;
+
+policz wszystkich uczniów z Łodzi - SELECT COUNT(*) As chłopaki_z_łodzi from uczniowie where miejscowosc='Łódź';
+wyświetl hobby które występują u co najmniej 10 uczniów - SELECT hobby, COUNT(*) as liczba_uczniów from uczniowie group by hobby having count(*) >= 10 order by liczba_uczniów DESC;  
+
+• COUNT() – zwraca liczbę wierszy lub rekordów (np. COUNT(*) liczy wszystkie wiersze, a COUNT(kolumna) pomija wartości NULL).
+• AVG() – wylicza średnią arytmetyczną dla wskazanego pola liczbowego (ignoruje NULL).
+• MIN() – zwraca najmniejszą wartość z danego zbioru (liczbową lub tekstową).
+• MAX() – zwraca największą wartość z danego zbioru.
+
+tworzenie plikow
+zaawansowane wyszukiwanie po nazwie
+sumy kontrolne,weryfikacja
+tworzenie nazw plikow wedlug schematow
+dzielenie plikow za pomoca ZIP-a
+podstawowe operacje
+
+1) Wyłączenie sewera - mysqladmin -u root shutdown
+2) Uruchomienie serwera MySQL jako samodzielną aplikację - mysqld --console
+3) Zatrzymanie usługi MySQL - net stop nazwa_usługi
+4) Uruchom program klienta i połącz się z serwerem MySQL - mysql -u root --password-hasło, mysql -u root -phasło
+5) Zakończenie połączenia z serwerem - quit
+6) tworzenie bazy - create database nazwa_bazy;
+7) Usuwanie bazy danych - drop database nazwa_bazy;
+8) Logowanie do serwera z wyborem bazy - mysql -u nazwa_użytkownika -phasło nazwa_bazy
+9) Tworzenie i usuwanie kont użytkowników - create user nazwa [identified by [password] 'hasło'];
+10) Tworzenie konta z nadaniem hasła - create user nazwa identified by 'haslo'
+11) Usuwanie konta użytkownika - drop user nazwa
+
+poradnik (tutorial) - Git
+.pdf (spis treści)
+(numery strony)
+(nagłówki)
+(zrzuty ekranu - podpisane i ponumerowane)
+
+12) Zmiana nazwy użytkownika - rename user nazwa to nowa nazwa
+13) Zmiana hasła do konta - set password for nazwa = password('hasło');
+14) Nadawanie praw do konta użytkownika - GRANT usage ON* to nazwa;
+15) 2 sposób zmiany hasła - GRANT usage ON* to nazwa identified by 'hasło'
+
+uslugi xampp
+pliki konfiguracyjne
+na jakich portach pracuje xampp
+
+backup - baz danych
+/kopia bazy (plik binarny)
+
+Kolumne z zdjeciem dodac
+w bazie ma byc zdj zdj
+wykonac export do sql
+backup mysqldump
+
+Backup poradnik
+mysqldump -u root 4bgr1 uczniowie > uczniowie_backup.sql
+type uczniowie_backup.sql
+
+porty 
+konfiguracja xamppa
+zmiana nazwy uzytkownika 
+zmiana hasla uzytkownika
+
+21) Wyświetl imię i nazwisko ucznia w jednej kolumnie - SELECT id, CONCAT(imie,'',nazwisko) AS uczen FROM uczniowie;
+22) Wyświetl imiona uczniów wielkimi literami - SELECT id, UPPER(imie) AS imie_duzymi_literami, nazwisko FROM uczniowie
+23) Wyświetl uczniów urodzonych w czerwcu - SELECT imie, nazwisko, data_urodzenia FROM uczniowie WHERE MONTH(data_urodzenia) = 6 ORDER BY data_urodzenia
+24) Wyświetl uczniów urodzonych w czerwcu i grudniu - SELECT imie, nazwisko, data_urodzenia FROM uczniowie WHERE MONTH(data_urodzenia) in (6,12) ORDER BY data_urodzenia; 
+25) Wyświetl uczniów urodzonych w czerwcu lub w grudniu - SELECT imie, nazwisko, data_urodzenia FROM uczniowie WHERE MONTH(data_urodzenia) = 6 or MONTH(data_urodzenia) = 12 ORDER BY data_urodzenia; 
+26) Oblicz wiek każdego ucznia -  Wyświetl uczniów urodzonych w czerwcu lub w grudniu - SELECT imie,nazwisko,data_urodzenia, TIMESTAMPDIFF(YEAR,data_urodzenia,CURDATE()) As wiek FROM uczniowie Order By Wiek DESC;
+27) Wyświetl uczniów, których adres e-mail zawiera naziwsko "kowalski" - SELECT imie, nazwisko, email FROM uczniowie WHERE email LIKE '%kowalski%';
+28) Wyświetl najstarszego i najmłodszego ucznia według daty urodzenia (same daty) - SELECT MIN(data_urodzenia) AS najstarszy, MAX(data_urodzenia) AS najmłodszy FROM uczniowie
+29) Wyświetl uczniów mieszkających w najliczniej reprezentowanej miejscowości - SELECT imie, nazwisko, miejscowosc FROM uczniowie WHERE miejscowosc = (SELECT miejscowosc FROM uczniowie GROUP BY miejscowosc ORDER BY COUNT(*) DESC, miejscowosc ASC LIMIT 1 ) ORDER BY nazwisko, imie;
+30) Wyświetl uczniów, których imię ma dokładnie 5 liter - SELECT id, imie, nazwisko FROM uczniowie WHERE CHAR_LENGTH(imie) = 5 ORDER BY imie;
+31) Wyświetl trzy ostatnie cyfry numeru telefonu każdego ucznia - SELECT imie, nazwisko, RIGHT(telefon, 3) AS kocowka_telefonu FROM uczniowie ORDER BY nazwisko; 
+32) Wyświetl nazwiska uczniów zapisane małymi literami - SELECT imie, LOWER(nazwisko) AS nazwisko_male_litery FROM uczniowie
+33) Wyświetl uczniów urodzonych w pierwszym kwartale roku - SELECT imie, nazwisko, data_urodzenia FROM uczniowie WHERE MONTH(data_urodzenia) BETWEEN 1 AND 3 ORDER BY data_urodzenia; 
+35) Wyświetl datę urodzenia ucznia w formacie DD-MM-RRRR - SELECT imie, nazwisko, DATE_FORMAT(data_urodzenia, '%d-%m-%Y') AS data_polska FROM uczniowie ORDER BY nazwisko;
+
+
+
+Funkcje agregujące 
+36) Dodaj jednego nowego ucznia podając wszystkie kolumny, w tym identyfikatorze - Insert into uczniowie (id, nazwisko, imie, data_urodzenia, miejscowosc, kod_pocztowy, email, telefon, hobby) VALUES (306, 'Robaszek', 'Robert', '2009-11-26', 'gomunice', '97-550', 'rrobaszek2009@gmail.com', '111111111', 'koledzy');
+37) Dodaj dwóch uczniów jednym poleceniem INSERT -  Insert into uczniowie (id, nazwisko, imie, data_urodzenia, miejscowosc, kod_pocztowy, email, telefon, hobby)
+VALUES
+(307, 'Robaszek', 'Robert', '2009-11-26', 'gomunice', '97-550', 'robalini2009@gmail.com', '111111111', 'koledzy'), (308, 'Robaszek', 'Robert', '2009-11-26', 'gomunice', '97-550', 'robaczek2009@gmail.com', '111111111', 'koledzy');
+38) Dodaj ucznia bez podawania id - niech AUTO INCREMENT nada je automatycznie - Insert into uczniowie (nazwisko, imie, data_urodzenia, miejscowosc, kod_pocztowy, email, telefon, hobby) VALUES ('Ociepa', 'Michał', '2009-16-06', 'Gidle', '97-540', 'mociepa4@zse-e.edu.pl', '111111111', 'sport');
+39) Utwórz kopie danych ucznia o id = 1 jako nowy rekord z id = 309 - Insert into uczniowie (id, nazwisko, imie, data_urodzenia, miejscowosc, kod_pocztowy, email, telefon, hobby) VALUES
+
+40)stawiające do tabeli logowanie nick „Jeremi” z hasłem „Jer123”. Wstawianemu wierszowi
+należy nadać identyfikator, odpowiadający wartości klucza obcego dla wiersza z danymi „Jeremi
+Kowalski” z tabeli uczestnicy - INSERT into logowanie (id, nick, haslo) VALUES ( (SELECT logowanie_id FROM uczestnicy WHERE imie = 'Jeremi' AND nazwisko = 'Kowalski'), 'Jeremi', 'Jer123');
+
+Połączenie z bazą
+<?php
+//Stworzenie polaczenia z baza danych
+mysqli_connect('localhost', 'root', '', '4bgr1);
+?>
+
+Stworzenie bazy
+<?php
+$host = 'localhost';
+$user = 'root';
+$password = '';
+$database = '';
+
+$polaczenie = mysqli_connect($host, $user, $password, $database);
+
+if (!$polaczenie) {
+    die('Nie można połączyć z bazą danych: ' . mysqli_connect_error());
+} else {
+    echo 'Połączono z bazą danych';
+}
+
+$sql = "CREATE DATABSE 'test3'";
+
+mysqli_query($polacznie, $sql);
+?>
+
+Przerobic co najmniej 4 odcinki Zelenta mysql i 4 odcinki php
+
+
+
+
+# mysql -uroot -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 66
+Server version: 10.4.32-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> create database nauka;
+Query OK, 1 row affected (0.010 sec)
+
+MariaDB [(none)]> show databse;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'databse' at line 1
+MariaDB [(none)]> show databses;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'databses' at line 1
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| 1l_gr2             |
+| 4bgr1              |
+| 4g_gr1             |
+| adam               |
+| baza1l_gr1         |
+| baza5_1l_gr1       |
+| baza5_1l_gr2       |
+| chat               |
+| dane_1l_gr1        |
+| dane_1l_gr2        |
+| egzamin3_1l_gr1    |
+| egzamin3_1l_gr2    |
+| information_schema |
+| motory             |
+| mysql              |
+| nauka              |
+| performance_schema |
+| phpmyadmin         |
+| test               |
+| test3              |
++--------------------+
+20 rows in set (0.002 sec)
+
+MariaDB [(none)]> use nauka;
+Database changed
+MariaDB [nauka]> show tables;
+Empty set (0.001 sec)
+
+MariaDB [nauka]> create table pracownicy(id int auto_increment, imie varchar(20), nazwisko varchar(20), dzial int, zarobki int, primary key(id));
+Query OK, 0 rows affected (0.031 sec)
+
+MariaDB [nauka]> show tables;
++-----------------+
+| Tables_in_nauka |
++-----------------+
+| pracownicy      |
++-----------------+
+1 row in set (0.002 sec)
+
+MariaDB [nauka]> desc pracownicy;
++----------+-------------+------+-----+---------+----------------+
+| Field    | Type        | Null | Key | Default | Extra          |
++----------+-------------+------+-----+---------+----------------+
+| id       | int(11)     | NO   | PRI | NULL    | auto_increment |
+| imie     | varchar(20) | YES  |     | NULL    |                |
+| nazwisko | varchar(20) | YES  |     | NULL    |                |
+| dzial    | int(11)     | YES  |     | NULL    |                |
+| zarobki  | int(11)     | YES  |     | NULL    |                |
++----------+-------------+------+-----+---------+----------------+
+5 rows in set (0.073 sec)
+
+MariaDB [nauka]> insert into pracownicy values(null,'jan','nowak',1,2500);
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [nauka]> insert into pracownicy values(null,'robert','robaczek',1,3500);
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [nauka]> insert into pracownicy values(null,'maciek','bartnik',1,8500);
+Query OK, 1 row affected (0.018 sec)
+
+MariaDB [nauka]> select * from pracownicy;
++----+--------+----------+-------+---------+
+| id | imie   | nazwisko | dzial | zarobki |
++----+--------+----------+-------+---------+
+|  1 | jan    | nowak    |     1 |    2500 |
+|  2 | robert | robaczek |     1 |    3500 |
+|  3 | maciek | bartnik  |     1 |    8500 |
++----+--------+----------+-------+---------+
+3 rows in set (0.001 sec)
+
+MariaDB [nauka]> select imie,nazwisko from pracownicy;
++--------+----------+
+| imie   | nazwisko |
++--------+----------+
+| jan    | nowak    |
+| robert | robaczek |
+| maciek | bartnik  |
++--------+----------+
+3 rows in set (0.000 sec)
+
+MariaDB [nauka]> select * from pracownicy where imie='robert' and nazwisko='robaczek'
+    -> select * from pracownicy where imie='robert' and nazwisko='robaczek';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'select * from pracownicy where imie='robert' and nazwisko='robaczek'' at line 2
+MariaDB [nauka]> select * from pracownicy where imie='robert' and nazwisko='robaczek';
++----+--------+----------+-------+---------+
+| id | imie   | nazwisko | dzial | zarobki |
++----+--------+----------+-------+---------+
+|  2 | robert | robaczek |     1 |    3500 |
++----+--------+----------+-------+---------+
+1 row in set (0.001 sec)
+
+MariaDB [nauka]> update pracownicy set dzial=2 where id=3;
+Query OK, 1 row affected (0.004 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [nauka]> select * from pracownicy;
++----+--------+----------+-------+---------+
+| id | imie   | nazwisko | dzial | zarobki |
++----+--------+----------+-------+---------+
+|  1 | jan    | nowak    |     1 |    2500 |
+|  2 | robert | robaczek |     1 |    3500 |
+|  3 | maciek | bartnik  |     2 |    8500 |
++----+--------+----------+-------+---------+
+3 rows in set (0.001 sec)
+
+MariaDB [nauka]> select * from pracownicy where zarobki>2000;
++----+--------+----------+-------+---------+
+| id | imie   | nazwisko | dzial | zarobki |
++----+--------+----------+-------+---------+
+|  1 | jan    | nowak    |     1 |    2500 |
+|  2 | robert | robaczek |     1 |    3500 |
+|  3 | maciek | bartnik  |     2 |    8500 |
++----+--------+----------+-------+---------+
+3 rows in set (0.001 sec)
+
+MariaDB [nauka]> select sum(zarobki) from pracownicy;
++--------------+
+| sum(zarobki) |
++--------------+
+|        14500 |
++--------------+
+1 row in set (0.001 sec)
+
+MariaDB [nauka]> select sum(zarobki) from pracownicy where id=1 and id=2
+    -> select sum(zarobki) from pracownicy where id=1 and id=2;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'select sum(zarobki) from pracownicy where id=1 and id=2' at line 2
+MariaDB [nauka]> select sum(zarobki) from pracownicy where id=1 and id=2;
++--------------+
+| sum(zarobki) |
++--------------+
+|         NULL |
++--------------+
+1 row in set (0.001 sec)
+
+MariaDB [nauka]> select sum(zarobki) from pracownicy where id=1 or id=2
+    -> select sum(zarobki) from pracownicy where id=1 or id=2;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'select sum(zarobki) from pracownicy where id=1 or id=2' at line 2
+MariaDB [nauka]> select sum(zarobki) from pracownicy where id=1 or id=2;
++--------------+
+| sum(zarobki) |
++--------------+
+|         6000 |
++--------------+
+1 row in set (0.001 sec)
+
+MariaDB [nauka]> select sum(zarobki) as ile from pracownicy;
++-------+
+| ile   |
++-------+
+| 14500 |
++-------+
+1 row in set (0.001 sec)
+
+MariaDB [nauka]> select avg(zarobki) from pracownicy;
++--------------+
+| avg(zarobki) |
++--------------+
+|    4833.3333 |
++--------------+
+1 row in set (0.001 sec)
+
+MariaDB [nauka]> select count(1) from pracownicy;
++----------+
+| count(1) |
++----------+
+|        3 |
++----------+
+1 row in set (0.001 sec)
+
+MariaDB [nauka]> select count(*) from pracownicy where imie='jan';
++----------+
+| count(*) |
++----------+
+|        1 |
++----------+
+1 row in set (0.001 sec)
+
+MariaDB [nauka]> select * from pracownicy
+    -> select * from pracownicy;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'select * from pracownicy' at line 2
+MariaDB [nauka]> select * from pracownicy;
++----+--------+----------+-------+---------+
+| id | imie   | nazwisko | dzial | zarobki |
++----+--------+----------+-------+---------+
+|  1 | jan    | nowak    |     1 |    2500 |
+|  2 | robert | robaczek |     1 |    3500 |
+|  3 | maciek | bartnik  |     2 |    8500 |
++----+--------+----------+-------+---------+
+3 rows in set (0.001 sec)
+
+MariaDB [nauka]> delete from pracownicy where id=3
+    -> delete from pracownicy where id=3;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'delete from pracownicy where id=3' at line 2
+MariaDB [nauka]> delete from pracownicy where id=3;
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [nauka]> select * from pracownicy
+    -> select * from pracownicy;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'select * from pracownicy' at line 2
+MariaDB [nauka]> select * from pracownicy;
++----+--------+----------+-------+---------+
+| id | imie   | nazwisko | dzial | zarobki |
++----+--------+----------+-------+---------+
+|  1 | jan    | nowak    |     1 |    2500 |
+|  2 | robert | robaczek |     1 |    3500 |
++----+--------+----------+-------+---------+
+2 rows in set (0.001 sec)
+
+MariaDB [nauka]> insert into pracownicy values(null,'maciek','bartnik',1,8500);
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [nauka]> select * from pracownicy;
++----+--------+----------+-------+---------+
+| id | imie   | nazwisko | dzial | zarobki |
++----+--------+----------+-------+---------+
+|  1 | jan    | nowak    |     1 |    2500 |
+|  2 | robert | robaczek |     1 |    3500 |
+|  4 | maciek | bartnik  |     1 |    8500 |
++----+--------+----------+-------+---------+
+3 rows in set (0.001 sec)
+
+MariaDB [nauka]> update pracownicy set dzial=2 where id=4;
+Query OK, 1 row affected (0.020 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [nauka]> create table dzialy(numer int, nazwa varchar(15), primary key(numer));
+Query OK, 0 rows affected (0.040 sec)
+
+MariaDB [nauka]> show tables;
++-----------------+
+| Tables_in_nauka |
++-----------------+
+| dzialy          |
+| pracownicy      |
++-----------------+
+2 rows in set (0.002 sec)
+
+MariaDB [nauka]> insert into dzialy values(1,'produkcja');
+Query OK, 1 row affected (0.007 sec)
+
+MariaDB [nauka]> insert into dzialy values(2,'marketing');
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [nauka]> select * from dzialy;
++-------+-----------+
+| numer | nazwa     |
++-------+-----------+
+|     1 | produkcja |
+|     2 | marketing |
++-------+-----------+
+2 rows in set (0.001 sec)
+
+MariaDB [nauka]> select * from pracownicy;
++----+--------+----------+-------+---------+
+| id | imie   | nazwisko | dzial | zarobki |
++----+--------+----------+-------+---------+
+|  1 | jan    | nowak    |     1 |    2500 |
+|  2 | robert | robaczek |     1 |    3500 |
+|  4 | maciek | bartnik  |     2 |    8500 |
++----+--------+----------+-------+---------+
+3 rows in set (0.001 sec)
+
+
+Praca domowa wymaga linków
+Na swoim koncie - Github
+1)Projektujemy i uruchamiamy prostą stronę internetową 
+2)Na stronie umieszczamy przycisk z dowolnym skryptem php
+3)Skrypt php ma wykonać dowolną operację na bazie danych
+4)Przesłać link do strony z bazą danych oraz link do dokumentu opisującego proces konfiguracji i zapisać jako .pdf
+
+
+Setting environment for using XAMPP for Windows.
+uczeń@KOMPUTER07 c:\xampp
+# mysql -uroot -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 36
+Server version: 10.4.32-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> use naukja
+ERROR 1049 (42000): Unknown database 'naukja'
+MariaDB [(none)]> use nauka;
+Database changed
+MariaDB [nauka]> select * from pracownicy;
++----+--------+------------+-------+---------+
+| id | imie   | nazwisko   | dzial | zarobki |
++----+--------+------------+-------+---------+
+|  1 | jan    | nowak      |     1 |    2500 |
+|  2 | Adam   | Kowalski   |     1 |    3500 |
+|  4 | Robert | Brzozowski |     2 |    1500 |
++----+--------+------------+-------+---------+
+3 rows in set (0.013 sec)
+
+MariaDB [nauka]> select * from dzialy;
++-------+-----------+
+| numer | nazwa     |
++-------+-----------+
+|     1 | produkcja |
+|     2 | marketing |
++-------+-----------+
+2 rows in set (0.023 sec)
+
+MariaDB [nauka]> select imie, nazwisko, nazwa from pracownicy, dzialy;
++--------+------------+-----------+
+| imie   | nazwisko   | nazwa     |
++--------+------------+-----------+
+| jan    | nowak      | produkcja |
+| Adam   | Kowalski   | produkcja |
+| Robert | Brzozowski | produkcja |
+| jan    | nowak      | marketing |
+| Adam   | Kowalski   | marketing |
+| Robert | Brzozowski | marketing |
++--------+------------+-----------+
+6 rows in set (0.001 sec)
+
+MariaDB [nauka]> select imie, nazwisko, nazwa from pracownicy, dzialy where dzial=numer;
++--------+------------+-----------+
+| imie   | nazwisko   | nazwa     |
++--------+------------+-----------+
+| jan    | nowak      | produkcja |
+| Adam   | Kowalski   | produkcja |
+| Robert | Brzozowski | marketing |
++--------+------------+-----------+
+3 rows in set (0.001 sec)
+
+MariaDB [nauka]> Bye
+
+uczeń@KOMPUTER07 c:\xampp
+# mysql -uroot -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 39
+Server version: 10.4.32-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> create table telefony(id int auto_increment, telefon varchar(20), primary key(id));
+ERROR 1046 (3D000): No database selected
+MariaDB [(none)]> use nauka;
+Database changed
+MariaDB [nauka]> create table telefony(id int auto_increment, telefon varchar(20), primary key(id));
+Query OK, 0 rows affected (0.029 sec)
+
+MariaDB [nauka]> insert into telefony VALUES (null, 'ajfon')
+    -> insert into telefony VALUES (null, 'ajfon');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'insert into telefony VALUES (null, 'ajfon')' at line 2
+MariaDB [nauka]> insert into telefony VALUES (null, 'ajfon');
+Query OK, 1 row affected (0.008 sec)
+
+MariaDB [nauka]> insert into telefony VALUES (null, 'motofolia');
+Query OK, 1 row affected (0.017 sec)
+
+MariaDB [nauka]> show telefony
+    -> show telefony;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'telefony
+show telefony' at line 2
+MariaDB [nauka]> show table telefony;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'telefony' at line 1
+MariaDB [nauka]> desc telefony;
++---------+-------------+------+-----+---------+----------------+
+| Field   | Type        | Null | Key | Default | Extra          |
++---------+-------------+------+-----+---------+----------------+
+| id      | int(11)     | NO   | PRI | NULL    | auto_increment |
+| telefon | varchar(20) | YES  |     | NULL    |                |
++---------+-------------+------+-----+---------+----------------+
+2 rows in set (0.049 sec)
+
+MariaDB [nauka]> select * from telefony;
++----+-----------+
+| id | telefon   |
++----+-----------+
+|  1 | ajfon     |
+|  2 | motofolia |
++----+-----------+
+2 rows in set (0.001 sec)
+
+MariaDB [nauka]> select imie, nazwisko, nazwa from pracownicy, telefony where telefon=numer;
+ERROR 1054 (42S22): Unknown column 'nazwa' in 'field list'
+MariaDB [nauka]> select imie, nazwisko, nazwa from pracownicy, telefony where telefon=telefon;
+ERROR 1054 (42S22): Unknown column 'nazwa' in 'field list'
+MariaDB [nauka]> select imie, nazwisko, telefon from pracownicy, telefony where telefon=telefon;
++--------+------------+-----------+
+| imie   | nazwisko   | telefon   |
++--------+------------+-----------+
+| jan    | nowak      | ajfon     |
+| Adam   | Kowalski   | ajfon     |
+| Robert | Brzozowski | ajfon     |
+| jan    | nowak      | motofolia |
+| Adam   | Kowalski   | motofolia |
+| Robert | Brzozowski | motofolia |
++--------+------------+-----------+
+6 rows in set (0.001 sec)
+
+
+
+
