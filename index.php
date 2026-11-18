@@ -14,7 +14,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         $stmt = $pdo->prepare("INSERT INTO logi_klikniec (opis) VALUES (?)");
         $stmt->execute(["Kliknięcie z IP: " . $_SERVER['REMOTE_ADDR']]);
-        
         $ile = $pdo->query("SELECT COUNT(*) FROM logi_klikniec")->fetchColumn();
         $komunikat = "Dodano rekord do SQLite. Łącznie w bazie: $ile";
     } catch (PDOException $e) {
