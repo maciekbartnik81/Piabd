@@ -1,16 +1,14 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
 $komunikat = "";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
-        $pdo = new PDO("mysql:host=localhost;charset=utf8mb4", "root", "");
-        $pdo->exec("CREATE DATABASE IF NOT EXISTS moja_baza; USE moja_baza;");
+        $pdo = new PDO("sqlite:baza.db");
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        
         $pdo->exec("CREATE TABLE IF NOT EXISTS logi_klikniec (
-            id INT AUTO_INCREMENT PRIMARY KEY,
-            opis VARCHAR(255),
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            opis TEXT,
             data_utworzenia DATETIME DEFAULT CURRENT_TIMESTAMP
         )");
         
@@ -18,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->execute(["Kliknięcie z IP: " . $_SERVER['REMOTE_ADDR']]);
         
         $ile = $pdo->query("SELECT COUNT(*) FROM logi_klikniec")->fetchColumn();
-        $komunikat = "Dodano rekord. Łącznie w bazie: $ile";
+        $komunikat = "Dodano rekord do SQLite. Łącznie w bazie: $ile";
     } catch (PDOException $e) {
         $komunikat = "Błąd: " . $e->getMessage();
     }
@@ -38,30 +36,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </style>
 </head>
 <body>
-
-    <header>
-        <strong>Projekt PHP + MySQL</strong>
-    </header>
-
+    <header><strong>Projekt PHP + SQLite</strong></header>
     <main>
         <h1>Maciek Bartnik</h1>
-        <form method="POST">
-            <button type="submit">Dodaj rekord do bazy</button>
-        </form>
-
-        <?php if ($komunikat): ?>
-            <p class="msg"><?= $komunikat ?></p>
-        <?php endif; ?>
+        <form method="POST"><button type="submit">Dodaj rekord do bazy</button></form>
+        <?php if ($komunikat): ?><p class="msg"><?= $komunikat ?></p><?php endif; ?>
     </main>
-
-    <footer>
-        &copy; <?= date("Y") ?> Maciek Bartnik
-    </footer>
-
+    <footer>&copy; <?= date("Y") ?> Maciek Bartnik</footer>
 </body>
 </html>
-<?php
-if (isset($conn) && $conn instanceof mysqli) {
-    $conn->close();
-}
-    ?>
